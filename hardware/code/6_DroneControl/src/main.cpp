@@ -1,46 +1,56 @@
-#include "DroneControl.h"
+
+#include "Joystick.hpp"
+
+Joystick controle = Joystick();
 
 void setup() {
+  
   Serial.begin(115200);
-
-  initDigPot();
 
   Serial.println("Digite o comando para o drone:");
 }
 
 void loop() {
-
+  
 
   if (Serial.available() > 0){
     String Leitura = Serial.readString();
 
     if (Leitura == "inicia"){
-      inicia();
+      controle.setJoystickUp1(255);
+      delay(1000);
+      controle.setJoystickUp1(0);
+      delay(1000);
+      controle.setJoystickUp1(127);
+      delay(1000);
+
+    Serial.println("Iniciou");
     } 
     if (Leitura == "sobe"){
-      sobe();
+      //sobe();
     } 
     if (Leitura == "desce"){
-      desce();
+      //desce();
     } 
     if (Leitura == "esquerda"){
-      esquerda();
+      //esquerda();
     } 
     if (Leitura == "direita"){
-      direita();
+      //direita();
     } 
     if (Leitura == "frete"){
-      frente();
+      //frente();
     } 
     if (Leitura == "tras"){
-      tras();
+      //tras();
     } 
     if (Leitura == "horario"){
-      horario();
+      //horario();
     } 
     if (Leitura == "antihor"){
-      antihorario();
+      //antihorario();
     } 
   }
+  
   
 }

@@ -2,11 +2,10 @@
 #include <Wire.h>
 #include <Adafruit_MCP4725.h>
 
-// TODO Ajustar o código para dois potenciômetros 
-
 float voltageMax = 3.56;
 
-Adafruit_MCP4725 dac;
+Adafruit_MCP4725 Dac1;
+Adafruit_MCP4725 Dac2;
 
 void setVoltage_8bit(int counter8){
 
@@ -14,7 +13,8 @@ void setVoltage_8bit(int counter8){
 
 	counter12 = (4095.0*counter8)/255;
 
-	dac.setVoltage(counter12, false);
+	Dac2.setVoltage(counter12, false);
+	Dac1.setVoltage(counter12, false);
 
 }
 
