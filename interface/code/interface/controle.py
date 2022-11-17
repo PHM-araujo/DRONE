@@ -4,14 +4,14 @@ import serial
 # Other functions
 
 def sendSerial(value):
-    ser = serial.Serial('/dev/ttyUSB0', baudrate=9600, timeout=1)
+    ser = serial.Serial('/dev/ttyUSB0', baudrate=115200, timeout=1)
     ser.write(value.encode())
     ser.close()
 
 # Buttons Functions 
 def pushButton_ligar(): 
     screen1.label_ligado_or_desligado.setText("Ligado")
-    sendSerial("on")
+    sendSerial("1")
 
 def pushButton_desligar(): 
     screen1.label_ligado_or_desligado.setText("Desligado")
@@ -47,7 +47,6 @@ def pushButton_descender():
 
     screen1.lcdNumber_acender_descender.display(aux)
     
-
 def pushButton_anti(): 
     aux = screen1.verticalSlider_anti_horario.sliderPosition();
     
@@ -137,7 +136,7 @@ def slide_esquerdaDireita():
 
 # App Exec 
 app = QtWidgets.QApplication([])
-screen1 = uic.loadUi("/home/pedro/Documents/Drone_interface/controle_interface.ui")
+screen1 = uic.loadUi("/home/pedro/Documents/Projects/LASC/interface/controle_interface.ui")
 
 # Pushbuttons 
 screen1.pushButton_ligar.clicked.connect(pushButton_ligar)
