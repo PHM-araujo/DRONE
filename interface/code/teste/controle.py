@@ -10,35 +10,35 @@ def sendSerial(value):
 
 # Buttons Functions 
 def pushButton_ligar(): 
-    sendSerial("1")
+    sendSerial("in")
 
 def pushButton_sobe(): 
-    sendSerial("2")
+    sendSerial("s")
 
 def pushButton_horario(): 
-    sendSerial("8")
+    sendSerial("h")
 
 def pushButton_antihorario(): 
-    sendSerial("9")
+    sendSerial("ant")
 
 def pushButton_esquerda(): 
-    sendSerial("4")
+    sendSerial("esq")
 
 def pushButton_direita(): 
-    sendSerial("5")
+    sendSerial("dir")
 
 def pushButton_desce(): 
-    sendSerial("3")
+    sendSerial("des")
 
 def pushButton_frente(): 
-    sendSerial("6")
+    sendSerial("fr")
 
 def pushButton_tras(): 
-    sendSerial("7")
+    sendSerial("tr")
 
 # App Exec 
 app = QtWidgets.QApplication([])
-screen1 = uic.loadUi("/home/pedro/Documents/Projects/LASC/teste/interface_teste.ui")
+screen1 = uic.loadUi("/home/pedro/Documents/Projects/LASC/DRONE/interface/code/teste/interface_teste.ui")
 
 # Pushbuttons 
 screen1.pushButton_ligar.clicked.connect(pushButton_ligar)
