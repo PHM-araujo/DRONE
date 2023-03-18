@@ -98,7 +98,6 @@ void Joystick::connectDrone(){
 	Serial.println("Iniciou");
 }
 
-
 void Joystick::getVoltages(String msg){
 	String SD_str = "", HA_str = "", FT_str = "", ED_str = "";
 

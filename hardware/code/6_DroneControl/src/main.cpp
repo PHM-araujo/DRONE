@@ -1,4 +1,5 @@
 #include "Joystick.h"
+#define Atime 100
 
 Joystick controle = Joystick();
 
@@ -18,7 +19,7 @@ void loop() {
 			controle.dacActutor();
 
 			// Tempo que o micro atua nos DACs 
-			delay(100);
+			delay(Atime);
 
 		}
 
