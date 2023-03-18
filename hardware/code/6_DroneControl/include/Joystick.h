@@ -15,31 +15,42 @@ private:
 
     Adafruit_MCP4725 Dac3;
     Adafruit_MCP4725 Dac4;
+
+    float SD = REPOUSO;
+    float HA = REPOUSO;
+    float FT = REPOUSO;
+    float ED = REPOUSO;
+
+
 public:
     enum Estado {BAIXO = 0, REPOUSO = 127, ALTO = 255};
 
     Joystick();
 
     void init();
-
     int Convert8to12bits(int counter8);
 
+    // Configura o Joystick relacionado ao DAC do Esp32 
     void setJoystickUp1(int nivel);
+    // Configura o Joystick relacionado ao DAC do Esp32
     void setJoystickUp2(int nivel);
+    // Configura o Joystick relacionado ao DAC externo
     void setJoystickUp3(int nivel);
+    // Configura o Joystick relacionado ao DAC externo
     void setJoystickUp4(int nivel);
 
-    void inicia();
-    void sobe();
-    void desce();
-    void esquerda();
-    void direita();
-    void frente();
-    void tras();
-    void horario();
-    void antihorario();
+    // Conecta o drone ao controle 
+    void connectDrone(); 
 
-    void printVoltage();
+    bool processMSG(String msg);
+    // Atua nos DACs 
+    void dacActutor();
+    // Retorna os DACs para o repouso
+    void returnRest();
+    // Pegar as tensões que serão usadas nos DACs 
+    void getVoltages(String msg);
+
+    void teste1(String Leitura);
 
 
 };
