@@ -1,5 +1,6 @@
 from PyQt5 import uic, QtWidgets 
 import serial
+ 
 
 # Other functions
 
@@ -10,31 +11,31 @@ def sendSerial(value):
 
 # Buttons Functions 
 def pushButton_ligar(): 
-    sendSerial("in")
+    sendSerial("C")
 
 def pushButton_sobe(): 
-    sendSerial("s")
+    sendSerial("S,SD150,HA127,FT127,ED127,")
 
 def pushButton_horario(): 
-    sendSerial("h")
+    sendSerial("S,SD127,HA150,FT127,ED127,")
 
 def pushButton_antihorario(): 
-    sendSerial("ant")
+    sendSerial("S,SD127,HA104,FT127,ED127,")
 
 def pushButton_esquerda(): 
-    sendSerial("esq")
+    sendSerial("S,SD127,HA127,FT127,ED104,")
 
 def pushButton_direita(): 
-    sendSerial("dir")
+    sendSerial("S,SD127,HA127,FT127,ED150,")
 
 def pushButton_desce(): 
-    sendSerial("des")
+    sendSerial("S,SD104,HA127,FT127,ED127,")
 
 def pushButton_frente(): 
-    sendSerial("fr")
+    sendSerial("S,SD127,HA127,FT150,ED127,")
 
 def pushButton_tras(): 
-    sendSerial("tr")
+    sendSerial("S,SD127,HA127,FT104,ED127,")
 
 # App Exec 
 app = QtWidgets.QApplication([])

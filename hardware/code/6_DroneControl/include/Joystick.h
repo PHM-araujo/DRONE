@@ -31,17 +31,18 @@ public:
     int Convert8to12bits(int counter8);
 
     // Configura o Joystick relacionado ao DAC do Esp32 
-    void setJoystickUp1(int nivel);
+    void setJoystickSD(int nivel);
     // Configura o Joystick relacionado ao DAC do Esp32
-    void setJoystickUp2(int nivel);
+    void setJoystickHA(int nivel);
     // Configura o Joystick relacionado ao DAC externo
-    void setJoystickUp3(int nivel);
+    void setJoystickFT(int nivel);
     // Configura o Joystick relacionado ao DAC externo
-    void setJoystickUp4(int nivel);
+    void setJoystickED(int nivel);
 
     // Conecta o drone ao controle 
     void connectDrone(); 
 
+    // Processa a msg passada pela serial 
     bool processMSG(String msg);
     // Atua nos DACs 
     void dacActutor();

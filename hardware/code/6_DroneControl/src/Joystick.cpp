@@ -24,10 +24,10 @@ void Joystick::init(){
   	}
 
 	Serial.println("Controle iniciando");
-	setJoystickUp1(127);
-  	setJoystickUp2(127);
-  	setJoystickUp3(127);
-  	setJoystickUp4(127);
+	setJoystickSD(REPOUSO);
+  setJoystickHA(REPOUSO);
+  setJoystickFT(REPOUSO);
+  setJoystickED(REPOUSO);
 	delay(5000);
 	Serial.println("Controle iniciado");
 }
@@ -42,103 +42,98 @@ int Joystick::Convert8to12bits(int counter8){
 
 }
 
-void Joystick::setJoystickUp1(int nivel){
+void Joystick::setJoystickSD(int nivel){
 	dacWrite(Dac1Adress, nivel);
 }
-void Joystick::setJoystickUp2(int nivel){
+void Joystick::setJoystickHA(int nivel){
 	dacWrite(Dac2Adress, nivel);
 
 }
-void Joystick::setJoystickUp3(int nivel){
+void Joystick::setJoystickFT(int nivel){
 	Dac3.setVoltage(Convert8to12bits(nivel), false);
 
 }
-void Joystick::setJoystickUp4(int nivel){
+void Joystick::setJoystickED(int nivel){
 	Dac4.setVoltage(Convert8to12bits(nivel), false);
 }
 
-void Joystick::teste1(String Leitura){
-    if (Leitura == "s"){
-      setJoystickUp1(255);
-      delay(5000);
-      setJoystickUp1(127);
-      delay(5000);
-      Serial.println("Subiu");
-    } 
-    if (Leitura == "des"){
-      setJoystickUp1(0);
-      delay(5000);
-      setJoystickUp1(127);
-      delay(5000);
-      Serial.println("Desceu");
-    } 
-    if (Leitura == "esq"){
-      setJoystickUp4(255);
-      delay(5000);
-      setJoystickUp4(127);
-      delay(5000);
-      Serial.println("Foi pra esquerda");
-    } 
-    if (Leitura == "dir"){
-      setJoystickUp4(0);
-      delay(5000);
-      setJoystickUp4(127);
-      delay(5000);
-      Serial.println("Foi pra direita");
-    } 
-    if (Leitura == "fr"){
-      setJoystickUp3(255);
-      delay(5000);
-      setJoystickUp3(127);
-      delay(5000);
-      Serial.println("Foi pra frente");
-    } 
-    if (Leitura == "tr"){
-      setJoystickUp3(0);
-      delay(5000);
-      setJoystickUp3(127);
-      delay(5000);
-      Serial.println("Foi pra tras");
-    } 
-    if (Leitura == "h"){
-      setJoystickUp2(255);
-      delay(5000);
-		setJoystickUp2(127);
-      delay(5000);
-      Serial.println("Rodou horario");
-    } 
-    if (Leitura == "ant"){
-      setJoystickUp2(0);
-      delay(5000);
-      setJoystickUp2(127);
-      delay(5000);
-      Serial.println("Rodou antihorario");
-    }
+//TODO testar
+void Joystick::returnRest(){
+  setJoystickSD(REPOUSO);
+  setJoystickHA(REPOUSO);
+  setJoystickFT(REPOUSO);
+  setJoystickED(REPOUSO);
+
+  delay(100);
 }
 
 bool Joystick::processMSG(String msg){
-	switch (msg[0])
+	
+  switch (msg[0])
 	{
 	case 'C':
 		connectDrone();
 		break;
-	
+
+  case 'S':
+    getVoltages(msg);
+    return true;
+		break;
+
 	default:
-		getVoltages(msg);
 		break;
 	}
+
+  return false;
 }
 
+//TODO testar
 void Joystick::connectDrone(){
-	setJoystickUp1(ALTO);
+	setJoystickSD(ALTO);
 	delay(1000);
-	setJoystickUp1(BAIXO);
+	setJoystickSD(BAIXO);
 	delay(1000);
-	setJoystickUp1(REPOUSO);
+	setJoystickSD(REPOUSO);
 	delay(1000);
 	Serial.println("Iniciou");
 }
 
+
 void Joystick::getVoltages(String msg){
 	String SD_str = "", HA_str = "", FT_str = "", ED_str = "";
+
+  int pos = msg.indexOf(',', 2);
+  for(int i = 4; i < pos; i++) SD_str += msg[i];
+
+  int pos2 = msg.indexOf(',', pos + 1);
+  for(int i = pos + 3; i < pos2; i++) HA_str += msg[i];
+
+  int pos3 = msg.indexOf(',', pos2 + 1);
+  for(int i = pos2 + 3; i < pos3; i++) FT_str += msg[i];
+
+  int pos4 = msg.indexOf(',', pos3 + 1);
+  for(int i = pos3 + 3; i < pos4; i++) ED_str += msg[i];
+
+  SD = SD_str.toInt();
+  Serial.print("SD = ");
+  Serial.println(SD);
+  HA = HA_str.toInt();
+  Serial.print("HA = ");
+  Serial.println(HA);
+  FT = FT_str.toInt();
+  Serial.print("FT = ");
+  Serial.println(FT);
+  ED = ED_str.toInt();
+  Serial.print("ED = ");
+  Serial.println(ED);
+}
+
+//TODO testar
+void Joystick::dacActutor(){
+  setJoystickSD(SD);
+  setJoystickHA(HA);
+  setJoystickFT(FT);
+  setJoystickED(ED);
+
+  Serial.println("Atuadores atualizados");
 }
