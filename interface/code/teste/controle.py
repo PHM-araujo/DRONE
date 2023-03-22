@@ -37,6 +37,9 @@ def pushButton_frente():
 def pushButton_tras(): 
     sendSerial("S,SD127,HA127,FT104,ED127,")
 
+def pushButton_pousar():
+    sendSerial("Pousar")
+
 # App Exec 
 app = QtWidgets.QApplication([])
 screen1 = uic.loadUi("/home/pedro/Documents/Projects/LASC/DRONE/interface/code/teste/interface_teste.ui")
@@ -51,6 +54,7 @@ screen1.pushButton_direita.clicked.connect(pushButton_direita)
 screen1.pushButton_desce.clicked.connect(pushButton_desce)
 screen1.pushButton_frente.clicked.connect(pushButton_frente)
 screen1.pushButton_tras.clicked.connect(pushButton_tras)
+screen1.pushButton_pousar.clicked.connect(pushButton_pousar)
 
 
 

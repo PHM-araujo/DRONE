@@ -136,7 +136,7 @@ def slide_esquerdaDireita():
 
 # App Exec 
 app = QtWidgets.QApplication([])
-screen1 = uic.loadUi("/home/pedro/Documents/Projects/LASC/interface/controle_interface.ui")
+screen1 = uic.loadUi("/home/pedro/Documents/Projects/LASC/DRONE/interface/code/interface/controle_interface.ui")
 
 # Pushbuttons 
 screen1.pushButton_ligar.clicked.connect(pushButton_ligar)
