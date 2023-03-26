@@ -4,24 +4,26 @@ Joystick::Joystick(){}
 
 void Joystick::init(){
 
-    I2CDac3.begin(17, 16, 100000);				// Comunicação I2C nos pinos escolhidos
+  pinMode(2, OUTPUT);
+
+  I2CDac3.begin(17, 16, 100000);				// Comunicação I2C nos pinos escolhidos
 	I2CDac4.begin(22, 21, 100000);				// Comunicação I2C nos pinos padrão
 
-    // Inicializa o objeto DAC com os pinos escolhidos 
+  // Inicializa o objeto DAC com os pinos escolhidos 
 	bool status3 = Dac3.begin(0x60, &I2CDac3);
 	bool status4 = Dac4.begin(0x60, &I2CDac4);
 
 	
-    // Checa erros
-	if (!status3) { 
-    	Serial.println("Could not find a valid DAC3, check wiring!");
-    	while (1);
-  	}
+  // Checa erros
+  if (!status3) { 
+    Serial.println("Could not find a valid DAC3, check wiring!");
+    while (1);
+  }
 
 	if (!status4) {
-    	Serial.println("Could not find a valid DAC4, check wiring!");
-    	while (1);
-  	}
+    Serial.println("Could not find a valid DAC4, check wiring!");
+    while (1);
+  }
 
 	Serial.println("Controle iniciando");
 	setJoystickSD(REPOUSO);
@@ -30,6 +32,7 @@ void Joystick::init(){
   setJoystickED(REPOUSO);
 	delay(5000);
 	Serial.println("Controle iniciado");
+  digitalWrite(2, HIGH);
 }
 
 int Joystick::Convert8to12bits(int counter8){
@@ -41,6 +44,7 @@ int Joystick::Convert8to12bits(int counter8){
     return counter12;
 
 }
+
 
 void Joystick::setJoystickSD(int nivel){
 	dacWrite(Dac1Adress, nivel);
@@ -63,11 +67,12 @@ void Joystick::returnRest(){
   setJoystickHA(REPOUSO);
   setJoystickFT(REPOUSO);
   setJoystickED(REPOUSO);
+  Serial.println("Atuadores no repouso");
 
   delay(100);
 }
 
-bool Joystick::processMSG(String msg){
+int Joystick::processMSG(String msg){
 	
   switch (msg[0])
 	{
@@ -75,16 +80,25 @@ bool Joystick::processMSG(String msg){
 		connectDrone();
 		break;
 
+  case 'I':
+    startDrone();
+    break;
+
+  case 'O':
+    DisconnectDrone();
+    break;
+
   case 'S':
     getVoltages(msg);
-    return true;
-		break;
-
+    return 1;
+  case 'D':
+    rest = true;
+    break;
 	default:
 		break;
 	}
 
-  return false;
+  return 0;
 }
 
 //TODO testar
@@ -113,6 +127,14 @@ void Joystick::getVoltages(String msg){
   int pos4 = msg.indexOf(',', pos3 + 1);
   for(int i = pos3 + 3; i < pos4; i++) ED_str += msg[i];
 
+  char D_str = msg[pos4 + 1];
+  Serial.println(D_str);
+
+  // Quando só se pressiona o botão 
+  if(D_str == 'D'){
+    rest = true;
+  }
+
   SD = SD_str.toInt();
   Serial.print("SD = ");
   Serial.println(SD);
@@ -135,4 +157,20 @@ void Joystick::dacActutor(){
   setJoystickED(ED);
 
   Serial.println("Atuadores atualizados");
+}
+
+void Joystick::startDrone(){
+  setJoystickSD(ALTO);
+	delay(1000);
+	setJoystickSD(REPOUSO);
+	delay(1000);
+	Serial.println("Motores Iniciado");
+}
+
+void Joystick::DisconnectDrone(){
+  setJoystickSD(BAIXO);
+	delay(3000);
+	setJoystickSD(REPOUSO);
+	delay(1000);
+	Serial.println("Motores Desligados");
 }

@@ -22,7 +22,10 @@ private:
     float ED = REPOUSO;
 
 
+
 public:
+    bool rest = false;
+
     enum Estado {BAIXO = 0, REPOUSO = 127, ALTO = 255};
 
     Joystick();
@@ -30,20 +33,20 @@ public:
     void init();
     int Convert8to12bits(int counter8);
 
-    // Configura o Joystick relacionado ao DAC do Esp32 
+    // Configura o Joystick relacionado ao DAC do Esp32 - 1
     void setJoystickSD(int nivel);
-    // Configura o Joystick relacionado ao DAC do Esp32
+    // Configura o Joystick relacionado ao DAC do Esp32 - 2
     void setJoystickHA(int nivel);
-    // Configura o Joystick relacionado ao DAC externo
+    // Configura o Joystick relacionado ao DAC externo - 3
     void setJoystickFT(int nivel);
-    // Configura o Joystick relacionado ao DAC externo
+    // Configura o Joystick relacionado ao DAC externo - 4
     void setJoystickED(int nivel);
 
     // Conecta o drone ao controle 
     void connectDrone(); 
 
     // Processa a msg passada pela serial 
-    bool processMSG(String msg);
+    int processMSG(String msg);
     // Atua nos DACs 
     void dacActutor();
     // Retorna os DACs para o repouso
@@ -52,6 +55,10 @@ public:
     void getVoltages(String msg);
 
     void teste1(String Leitura);
+
+    void startDrone();
+
+    void DisconnectDrone();
 
 
 };

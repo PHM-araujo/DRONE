@@ -1,5 +1,7 @@
 #include "Joystick.h"
-#define Atime 100
+#define Atime 1000
+
+int aux = -1;
 
 Joystick controle = Joystick();
 
@@ -14,16 +16,18 @@ void loop() {
 		String msg = Serial.readStringUntil(';');
 		Serial.println(msg);
 
+		aux = controle.processMSG(msg);
+
 		// Se não for um rotina atua nos DACs 
-		if(controle.processMSG(msg)){
+		if(aux){
 			controle.dacActutor();
-
-			// Tempo que o micro atua nos DACs 
-			delay(Atime);
-
+			delay(100);
 		}
-
-		controle.returnRest();
+		
+		if (controle.rest){
+			controle.returnRest();
+			controle.rest = false;
+		}
 		
 	}
 }

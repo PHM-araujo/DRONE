@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Inicia</string>
+    <string>Parear</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_sobe">
@@ -133,14 +133,27 @@
   <widget class="QPushButton" name="pushButton_pousar">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>250</x>
      <y>120</y>
      <width>89</width>
      <height>25</height>
     </rect>
    </property>
    <property name="text">
-    <string>Pousar</string>
+    <string>Iniciar</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_desligar">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>120</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Desligar</string>
    </property>
   </widget>
  </widget>
