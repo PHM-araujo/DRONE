@@ -166,7 +166,7 @@ screen1.verticalSlider_anti_horario.valueChanged.connect(slide_antiHorario)
 screen1.verticalSlider_frente_tras.valueChanged.connect(slide_frenteTras)
 screen1.verticalSlider_esquerda_direita.valueChanged.connect(slide_esquerdaDireita)
 
-# Incializa os Sliders
+# Incializa os Leds
 screen1.lcdNumber_acender_descender.display(screen1.verticalSlider_acender_descender.sliderPosition())
 screen1.lcdNumber_anti_horario.display(screen1.verticalSlider_anti_horario.sliderPosition())
 screen1.lcdNumber_frente_tras.display(screen1.verticalSlider_frente_tras.sliderPosition())

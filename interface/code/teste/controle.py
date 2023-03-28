@@ -1,7 +1,6 @@
 from PyQt5 import uic, QtWidgets 
 import serial
- 
-aux = True
+
 
 # Other functions
 
@@ -10,7 +9,9 @@ def sendSerial(value):
     ser.write(value.encode())
     ser.close()
 
-# Buttons Functions 
+# Btn Fuctions
+
+# ---------------- Btns rotinas ----------------#
 def pushButton_parear(): 
     sendSerial("P")
 
@@ -23,41 +24,81 @@ def pushButton_desligar():
 def Disclicked():
     sendSerial("R")
 
+# ---------------- Btns direções ---------------- #
 def pushButton_sobe(): 
-    sendSerial("S,SD200,HA127,FT127,ED127,")
-
-def pushButton_horario(): 
-    sendSerial("S,SD127,HA200,FT127,ED127,")
-
-def pushButton_antihorario(): 
-    sendSerial("S,SD127,HA54,FT127,ED127,")
-
-def pushButton_esquerda(): 
-    sendSerial("S,SD127,HA127,FT127,ED200,")
-
-def pushButton_direita(): 
-    sendSerial("S,SD127,HA127,FT127,ED54,")
+    passo = str(screen1.horizontalSlider_passo.sliderPosition() + 127)
+    msg = "S,SD" + passo + ",HA127,FT127,ED127,"
+    sendSerial(msg)
 
 def pushButton_desce(): 
-    sendSerial("S,SD54,HA127,FT127,ED127,")
+    passo = str(127 - screen1.horizontalSlider_passo.sliderPosition())
+    msg = "S,SD" + passo + ",HA127,FT127,ED127,"
+    sendSerial(msg)
+
+def pushButton_horario(): 
+    passo = str(screen1.horizontalSlider_passo.sliderPosition() + 127)
+    msg = "S,SD127,HA" + passo + ",FT127,ED127,"
+    sendSerial(msg)
+
+def pushButton_antihorario(): 
+    passo = str(127 - screen1.horizontalSlider_passo.sliderPosition())
+    msg = "S,SD127,HA" + passo + ",FT127,ED127,"
+    sendSerial(msg)
 
 def pushButton_frente(): 
-    sendSerial("S,SD127,HA127,FT200,ED127,")
+    passo = str(screen1.horizontalSlider_passo.sliderPosition() + 127)
+    msg = "S,SD127,HA127,FT" + passo + ",ED127,"
+    sendSerial(msg)
 
 def pushButton_tras(): 
-    sendSerial("S,SD127,HA127,FT54,ED127,")
+    passo = str(127 - screen1.horizontalSlider_passo.sliderPosition())
+    msg = "S,SD127,HA127,FT" + passo + ",ED127,"
+    sendSerial(msg)
+
+def pushButton_direita(): 
+    passo = str(screen1.horizontalSlider_passo.sliderPosition() + 127)
+    msg = "S,SD127,HA127,FT127,ED" + passo + ","
+    sendSerial(msg)
+
+def pushButton_esquerda(): 
+    passo = str(127 - screen1.horizontalSlider_passo.sliderPosition())
+    msg = "S,SD127,HA127,FT127,ED" + passo + ","
+    sendSerial(msg)
+
+# ---------------- Btns others ----------------# 
+def pushButton_passoAdd(): 
+    aux = screen1.horizontalSlider_passo.sliderPosition() + 1;
+
+    if aux < 127:
+        screen1.horizontalSlider_passo.setValue(aux);
+
+    screen1.lcdNumber_passo.display(aux) 
+
+def pushButton_passoMinus(): 
+    aux = screen1.horizontalSlider_passo.sliderPosition() - 1;
+    
+    if aux >= 0:
+        screen1.horizontalSlider_passo.setValue(aux);
+    
+    screen1.lcdNumber_passo.display(aux)  
+
+
+# Sld Fuctions
+def  slider_passo():
+    screen1.lcdNumber_passo.display(screen1.horizontalSlider_passo.sliderPosition())
+
 
 # App Exec 
 app = QtWidgets.QApplication([])
 screen1 = uic.loadUi("/home/pedro/Documents/Projects/LASC/DRONE/interface/code/teste/interface_teste.ui")
 
 # Pushbuttons 
-# ----------------Rotinas------------------------- #
+# ----------------Rotinas---------------- #
 screen1.pushButton_parear.clicked.connect(pushButton_parear)
 screen1.pushButton_desligar.clicked.connect(pushButton_desligar)
 screen1.pushButton_iniciar.clicked.connect(pushButton_iniciar)
 
-# ----------------Direções------------------------- #
+# ----------------Direções---------------- #
 screen1.pushButton_sobe.pressed.connect(pushButton_sobe)
 screen1.pushButton_sobe.clicked.connect(Disclicked)
 
@@ -85,7 +126,16 @@ screen1.pushButton_frente.clicked.connect(Disclicked)
 screen1.pushButton_tras.pressed.connect(pushButton_tras)
 screen1.pushButton_tras.clicked.connect(Disclicked)
 
+# ----------------Others---------------- #
+screen1.pushButton_passoAdd.clicked.connect(pushButton_passoAdd)
+screen1.pushButton_passoMinus.clicked.connect(pushButton_passoMinus)
 
+# Sliders
+screen1.horizontalSlider_passo.valueChanged.connect(slider_passo)
+
+
+# Leds
+screen1.lcdNumber_passo.display(screen1.horizontalSlider_passo.sliderPosition())
 
 
 screen1.show()

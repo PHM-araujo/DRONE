@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>676</width>
-    <height>146</height>
+    <width>700</width>
+    <height>232</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -154,6 +154,71 @@
    </property>
    <property name="text">
     <string>Desligar</string>
+   </property>
+  </widget>
+  <widget class="QSlider" name="horizontalSlider_passo">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>190</y>
+     <width>160</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <number>127</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>180</y>
+     <width>67</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Passo</string>
+   </property>
+  </widget>
+  <widget class="QLCDNumber" name="lcdNumber_passo">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>160</y>
+     <width>64</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_passoAdd">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>210</y>
+     <width>21</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>+</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_passoMinus">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>210</y>
+     <width>21</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>-</string>
    </property>
   </widget>
  </widget>
