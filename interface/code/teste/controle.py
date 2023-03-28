@@ -11,11 +11,17 @@ def sendSerial(value):
     ser.close()
 
 # Buttons Functions 
-def pushButton_ligar(): 
-    sendSerial("C")
+def pushButton_parear(): 
+    sendSerial("P")
+
+def pushButton_iniciar():
+    sendSerial("I")
+
+def pushButton_desligar():
+    sendSerial("D")
 
 def Disclicked():
-    sendSerial("D")
+    sendSerial("R")
 
 def pushButton_sobe(): 
     sendSerial("S,SD200,HA127,FT127,ED127,")
@@ -41,19 +47,17 @@ def pushButton_frente():
 def pushButton_tras(): 
     sendSerial("S,SD127,HA127,FT54,ED127,")
 
-def pushButton_pousar():
-    sendSerial("I")
-
-def pushButton_desligar():
-    sendSerial("O")
-
 # App Exec 
 app = QtWidgets.QApplication([])
 screen1 = uic.loadUi("/home/pedro/Documents/Projects/LASC/DRONE/interface/code/teste/interface_teste.ui")
 
 # Pushbuttons 
-screen1.pushButton_ligar.clicked.connect(pushButton_ligar)
+# ----------------Rotinas------------------------- #
+screen1.pushButton_parear.clicked.connect(pushButton_parear)
+screen1.pushButton_desligar.clicked.connect(pushButton_desligar)
+screen1.pushButton_iniciar.clicked.connect(pushButton_iniciar)
 
+# ----------------Direções------------------------- #
 screen1.pushButton_sobe.pressed.connect(pushButton_sobe)
 screen1.pushButton_sobe.clicked.connect(Disclicked)
 
@@ -81,9 +85,6 @@ screen1.pushButton_frente.clicked.connect(Disclicked)
 screen1.pushButton_tras.pressed.connect(pushButton_tras)
 screen1.pushButton_tras.clicked.connect(Disclicked)
 
-screen1.pushButton_desligar.clicked.connect(pushButton_desligar)
-
-screen1.pushButton_pousar.clicked.connect(pushButton_pousar)
 
 
 

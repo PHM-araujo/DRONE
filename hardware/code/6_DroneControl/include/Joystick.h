@@ -7,6 +7,8 @@
 
 class Joystick{
 private:
+    enum Estado {BAIXO = 0, REPOUSO = 127, ALTO = 255};
+
     int Dac1Adress = 25;
     int Dac2Adress = 26;
 
@@ -21,18 +23,7 @@ private:
     float FT = REPOUSO;
     float ED = REPOUSO;
 
-
-
-public:
-    bool rest = false;
-
-    enum Estado {BAIXO = 0, REPOUSO = 127, ALTO = 255};
-
-    Joystick();
-
-    void init();
-    int Convert8to12bits(int counter8);
-
+    //----------------------AUX----------------------//
     // Configura o Joystick relacionado ao DAC do Esp32 - 1
     void setJoystickSD(int nivel);
     // Configura o Joystick relacionado ao DAC do Esp32 - 2
@@ -42,24 +33,35 @@ public:
     // Configura o Joystick relacionado ao DAC externo - 4
     void setJoystickED(int nivel);
 
-    // Conecta o drone ao controle 
-    void connectDrone(); 
+    // COnverte o comando em 8 bits para 12 bits
+    int Convert8to12bits(int counter8);
 
-    // Processa a msg passada pela serial 
-    int processMSG(String msg);
-    // Atua nos DACs 
-    void dacActutor();
-    // Retorna os DACs para o repouso
-    void returnRest();
     // Pegar as tensões que serão usadas nos DACs 
     void getVoltages(String msg);
 
-    void teste1(String Leitura);
+public:
+    bool rest = false;
 
-    void startDrone();
 
+    Joystick();
+
+    void init();
+
+    // Processa a msg passada pela serial 
+    int processMSG(String msg);
+
+    // Atua nos DACs 
+    void dacActutor();
+
+    //----------------------Rotinas----------------------//
+    // Rotina para iniciar o drone 
+    void initDrone();
+    // Rotina para voltar o drone para o repouso 
+    void returnRest();
+    //  Rotina para desligar o drone
     void DisconnectDrone();
-
+    // Rotina para conectar o drone
+    void connectDrone(); 
 
 };
 

@@ -35,16 +35,45 @@ void Joystick::init(){
   digitalWrite(2, HIGH);
 }
 
-int Joystick::Convert8to12bits(int counter8){
+int Joystick::processMSG(String msg){
+	
+  switch (msg[0])
+	{
+	case 'P':
+		connectDrone();
+		break;
 
-	int counter12;
+  case 'I':
+    initDrone();
+    break;
 
-	counter12 = (4095.0*counter8)/255;
+  case 'D':
+    DisconnectDrone();
+    break;
 
-    return counter12;
+  case 'S':
+    getVoltages(msg);
+    return 1;
+  case 'R':
+    rest = true;
+    break;
+	default:
+		break;
+	}
 
+  return 0;
 }
 
+void Joystick::dacActutor(){
+  setJoystickSD(SD);
+  setJoystickHA(HA);
+  setJoystickFT(FT);
+  setJoystickED(ED);
+
+  Serial.println("Atuadores atualizados");
+}
+
+//----------------------AUX----------------------//
 
 void Joystick::setJoystickSD(int nivel){
 	dacWrite(Dac1Adress, nivel);
@@ -59,57 +88,6 @@ void Joystick::setJoystickFT(int nivel){
 }
 void Joystick::setJoystickED(int nivel){
 	Dac4.setVoltage(Convert8to12bits(nivel), false);
-}
-
-//TODO testar
-void Joystick::returnRest(){
-  setJoystickSD(REPOUSO);
-  setJoystickHA(REPOUSO);
-  setJoystickFT(REPOUSO);
-  setJoystickED(REPOUSO);
-  Serial.println("Atuadores no repouso");
-
-  delay(100);
-}
-
-int Joystick::processMSG(String msg){
-	
-  switch (msg[0])
-	{
-	case 'C':
-		connectDrone();
-		break;
-
-  case 'I':
-    startDrone();
-    break;
-
-  case 'O':
-    DisconnectDrone();
-    break;
-
-  case 'S':
-    getVoltages(msg);
-    return 1;
-  case 'D':
-    rest = true;
-    break;
-	default:
-		break;
-	}
-
-  return 0;
-}
-
-//TODO testar
-void Joystick::connectDrone(){
-	setJoystickSD(ALTO);
-	delay(1000);
-	setJoystickSD(BAIXO);
-	delay(1000);
-	setJoystickSD(REPOUSO);
-	delay(1000);
-	Serial.println("Iniciou");
 }
 
 void Joystick::getVoltages(String msg){
@@ -149,17 +127,20 @@ void Joystick::getVoltages(String msg){
   Serial.println(ED);
 }
 
-//TODO testar
-void Joystick::dacActutor(){
-  setJoystickSD(SD);
-  setJoystickHA(HA);
-  setJoystickFT(FT);
-  setJoystickED(ED);
+int Joystick::Convert8to12bits(int counter8){
 
-  Serial.println("Atuadores atualizados");
+	int counter12;
+
+	counter12 = (4095.0*counter8)/255;
+
+    return counter12;
+
 }
 
-void Joystick::startDrone(){
+//----------------------Rotinas----------------------//
+
+void Joystick::initDrone(){
+  Serial.println("Motores Iniciando...");
   setJoystickSD(ALTO);
 	delay(1000);
 	setJoystickSD(REPOUSO);
@@ -168,9 +149,33 @@ void Joystick::startDrone(){
 }
 
 void Joystick::DisconnectDrone(){
+  Serial.println("Motores Desligando...");
   setJoystickSD(BAIXO);
 	delay(3000);
 	setJoystickSD(REPOUSO);
 	delay(1000);
 	Serial.println("Motores Desligados");
 }
+
+void Joystick::returnRest(){
+  setJoystickSD(REPOUSO);
+  setJoystickHA(REPOUSO);
+  setJoystickFT(REPOUSO);
+  setJoystickED(REPOUSO);
+  Serial.println("Atuadores no repouso");
+
+  delay(100);
+}
+
+void Joystick::connectDrone(){
+	
+  Serial.println("Pareando...");
+  setJoystickSD(ALTO);
+	delay(1000);
+	setJoystickSD(BAIXO);
+	delay(1000);
+	setJoystickSD(REPOUSO);
+	delay(1000);
+	Serial.println("Pareado");
+}
+

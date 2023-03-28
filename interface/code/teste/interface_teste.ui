@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="pushButton_ligar">
+  <widget class="QPushButton" name="pushButton_parear">
    <property name="geometry">
     <rect>
      <x>300</x>
@@ -130,7 +130,7 @@
     <string>Tras</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_pousar">
+  <widget class="QPushButton" name="pushButton_iniciar">
    <property name="geometry">
     <rect>
      <x>250</x>
