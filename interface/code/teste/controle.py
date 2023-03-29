@@ -71,16 +71,16 @@ def pushButton_passoAdd():
 
     if aux < 127:
         screen1.horizontalSlider_passo.setValue(aux);
+        screen1.lcdNumber_passo.display(aux) 
 
-    screen1.lcdNumber_passo.display(aux) 
 
 def pushButton_passoMinus(): 
     aux = screen1.horizontalSlider_passo.sliderPosition() - 1;
     
     if aux >= 0:
         screen1.horizontalSlider_passo.setValue(aux);
+        screen1.lcdNumber_passo.display(aux)  
     
-    screen1.lcdNumber_passo.display(aux)  
 
 
 # Sld Fuctions
