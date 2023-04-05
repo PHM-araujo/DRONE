@@ -224,34 +224,34 @@
   <widget class="QPushButton" name="pushButton_CalibMaxSD">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>50</y>
+     <x>130</x>
+     <y>160</y>
      <width>20</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string> ↥</string>
+    <string> ↤</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_CalibMinSD">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>110</y>
+     <x>230</x>
+     <y>160</y>
      <width>20</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string> ↧</string>
+    <string> ↦</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_CalibMinED">
    <property name="geometry">
     <rect>
-     <x>670</x>
-     <y>140</y>
+     <x>680</x>
+     <y>170</y>
      <width>20</width>
      <height>20</height>
     </rect>
@@ -263,8 +263,8 @@
   <widget class="QPushButton" name="pushButton_CalibMaxED">
    <property name="geometry">
     <rect>
-     <x>600</x>
-     <y>140</y>
+     <x>580</x>
+     <y>170</y>
      <width>20</width>
      <height>20</height>
     </rect>

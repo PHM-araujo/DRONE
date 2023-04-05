@@ -78,12 +78,12 @@ def pushButton_tras():
     sendSerial(msg)
 
 def pushButton_direita(): 
-    passo = str(screen1.horizontalSlider_passo.sliderPosition() + 127)
+    passo = str(127 - screen1.horizontalSlider_passo.sliderPosition())
     msg = "S,SD127,HA127,FT127,ED" + passo + ","
     sendSerial(msg)
 
 def pushButton_esquerda(): 
-    passo = str(127 - screen1.horizontalSlider_passo.sliderPosition())
+    passo = str(127 + screen1.horizontalSlider_passo.sliderPosition())
     msg = "S,SD127,HA127,FT127,ED" + passo + ","
     sendSerial(msg)
 

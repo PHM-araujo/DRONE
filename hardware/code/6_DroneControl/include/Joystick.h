@@ -9,7 +9,7 @@ class Joystick{
 private:
     enum Estado {BAIXO = 0, REPOUSO = 127, ALTO = 255};
 
-    uint16_t timerBTN = 500;
+    uint16_t timerBTN = 300;
 
     int Dac1Adress = 25;
     int Dac2Adress = 26;

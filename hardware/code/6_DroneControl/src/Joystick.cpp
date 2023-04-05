@@ -129,11 +129,11 @@ void Joystick::getVoltages(String msg){
   int pos4 = msg.indexOf(',', pos3 + 1);
   for(int i = pos3 + 3; i < pos4; i++) ED_str += msg[i];
 
-  char D_str = msg[pos4 + 1];
-  Serial.println(D_str);
+  char R_str = msg[pos4 + 1];
+  Serial.println(R_str);
 
   // Quando só se pressiona o botão 
-  if(D_str == 'D'){
+  if(R_str == 'R'){
     rest = true;
   }
 
@@ -276,13 +276,13 @@ void Joystick::btnCalibFTAdd(){
 
 }
 
-//! Errado
+// S2
 void Joystick::btnCalibEDAdd(){
   Serial.println("Apertei btn");
   // A
-  digitalWrite(27, HIGH);
+  digitalWrite(27, LOW);
   // B
-	digitalWrite(14, LOW);
+	digitalWrite(14, HIGH);
   // C
   digitalWrite(12, LOW);
   // D
