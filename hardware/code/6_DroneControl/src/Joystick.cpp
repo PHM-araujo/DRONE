@@ -6,6 +6,12 @@ void Joystick::init(){
 
   pinMode(2, OUTPUT);
 
+  // Pinos btn
+  pinMode(13, OUTPUT);  
+  pinMode(14, OUTPUT);     
+  pinMode(27, OUTPUT);  
+  pinMode(12, OUTPUT);  
+
   I2CDac3.begin(17, 16, 100000);				// Comunicação I2C nos pinos escolhidos
 	I2CDac4.begin(22, 21, 100000);				// Comunicação I2C nos pinos padrão
 
@@ -54,9 +60,35 @@ int Joystick::processMSG(String msg){
   case 'S':
     getVoltages(msg);
     return 1;
+
   case 'R':
     rest = true;
     break;
+
+  case '1':
+    btnCalibSDAdd();
+    break;
+
+  case '2':
+    btnCalibFTAdd();
+    break;
+
+  case '3':
+    btnCalibEDAdd();
+    break;
+
+  case '4':
+    btnCalibSDMinnus();
+    break;
+
+  case '5':
+    btnCalibFTMinnus();
+    break;
+
+  case '6':
+    btnCalibEDMinnus();
+    break;
+  
 	default:
 		break;
 	}
@@ -177,5 +209,167 @@ void Joystick::connectDrone(){
 	setJoystickSD(REPOUSO);
 	delay(1000);
 	Serial.println("Pareado");
+}
+
+// S8
+void Joystick::btnCalibSDAdd(){
+  Serial.println("Apertei btn");
+  // A
+  digitalWrite(27, LOW);
+  // B
+	digitalWrite(14, LOW);
+  // C
+  digitalWrite(12, LOW);
+  // D
+	digitalWrite(13, HIGH);
+
+  delay(timerBTN);
+
+  // A
+  digitalWrite(27, LOW);
+  // B
+	digitalWrite(14, LOW);
+  // C
+  digitalWrite(12, LOW);
+  // D
+	digitalWrite(13, LOW);
+
+  delay(500);
+
+}
+
+// S3
+void Joystick::btnCalibFTAdd(){
+  Serial.println("Apertei btn");
+  // A
+  digitalWrite(27, HIGH);
+  // B
+	digitalWrite(14, HIGH);
+  // C
+  digitalWrite(12, LOW);
+  // D
+	digitalWrite(13, LOW);
+
+  delay(timerBTN);
+
+  // A
+  digitalWrite(27, LOW);
+  // B
+	digitalWrite(14, LOW);
+  // C
+  digitalWrite(12, LOW);
+  // D
+	digitalWrite(13, LOW);
+
+  delay(500);
+
+}
+
+//! Errado
+void Joystick::btnCalibEDAdd(){
+  Serial.println("Apertei btn");
+  // A
+  digitalWrite(27, HIGH);
+  // B
+	digitalWrite(14, LOW);
+  // C
+  digitalWrite(12, LOW);
+  // D
+	digitalWrite(13, LOW);
+
+  delay(timerBTN);
+
+  // A
+  digitalWrite(27, LOW);
+  // B
+	digitalWrite(14, LOW);
+  // C
+  digitalWrite(12, LOW);
+  // D
+	digitalWrite(13, LOW);
+
+  delay(500);
+
+}
+
+//S10
+void Joystick::btnCalibSDMinnus(){
+  Serial.println("Apertei btn");
+  // A
+  digitalWrite(27, LOW);
+  // B
+	digitalWrite(14, HIGH);
+  // C
+  digitalWrite(12, LOW);
+  // D
+	digitalWrite(13, HIGH);
+
+  delay(timerBTN);
+
+  // A
+  digitalWrite(27, LOW);
+  // B
+	digitalWrite(14, LOW);
+  // C
+  digitalWrite(12, LOW);
+  // D
+	digitalWrite(13, LOW);
+
+  delay(500);
+
+}
+
+// S6
+void Joystick::btnCalibFTMinnus(){
+  Serial.println("Apertei btn");
+  // A
+  digitalWrite(27, LOW);
+  // B
+	digitalWrite(14, HIGH);
+  // C
+  digitalWrite(12, HIGH);
+  // D
+	digitalWrite(13, LOW);
+
+  delay(timerBTN);
+
+  // A
+  digitalWrite(27, LOW);
+  // B
+	digitalWrite(14, LOW);
+  // C
+  digitalWrite(12, LOW);
+  // D
+	digitalWrite(13, LOW);
+
+  delay(500);
+
+}
+
+// S4
+void Joystick::btnCalibEDMinnus(){
+  Serial.println("Apertei btn");
+  // A
+  digitalWrite(27, LOW);
+  // B
+	digitalWrite(14, LOW);
+  // C
+  digitalWrite(12, HIGH);
+  // D
+	digitalWrite(13, LOW);
+
+  delay(timerBTN);
+
+  // A
+  digitalWrite(27, LOW);
+  // B
+	digitalWrite(14, LOW);
+  // C
+  digitalWrite(12, LOW);
+  // D
+	digitalWrite(13, LOW);
+
+  delay(500);
+
 }
 

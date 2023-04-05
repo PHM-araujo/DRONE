@@ -24,6 +24,25 @@ def pushButton_desligar():
 def Disclicked():
     sendSerial("R")
 
+def calibSDAdd():
+    sendSerial("1")
+
+def calibFTAdd():
+    sendSerial("2")
+
+def calibEDAdd():
+    sendSerial("3")
+
+def calibSDMinnus():
+    sendSerial("4")
+
+def calibFTMinnus():
+    sendSerial("5")
+
+def calibEDMinnus():
+    sendSerial("6")   
+
+
 # ---------------- Btns direções ---------------- #
 def pushButton_sobe(): 
     passo = str(screen1.horizontalSlider_passo.sliderPosition() + 127)
@@ -97,6 +116,15 @@ screen1 = uic.loadUi("/home/pedro/Documents/Projects/LASC/DRONE/interface/code/t
 screen1.pushButton_parear.clicked.connect(pushButton_parear)
 screen1.pushButton_desligar.clicked.connect(pushButton_desligar)
 screen1.pushButton_iniciar.clicked.connect(pushButton_iniciar)
+
+screen1.pushButton_CalibMaxSD.clicked.connect(calibSDAdd)
+screen1.pushButton_CalibMaxFT.clicked.connect(calibFTAdd)
+screen1.pushButton_CalibMaxED.clicked.connect(calibEDAdd)
+
+
+screen1.pushButton_CalibMinSD.clicked.connect(calibSDMinnus)
+screen1.pushButton_CalibMinFT.clicked.connect(calibFTMinnus)
+screen1.pushButton_CalibMinED.clicked.connect(calibEDMinnus)
 
 # ----------------Direções---------------- #
 screen1.pushButton_sobe.pressed.connect(pushButton_sobe)

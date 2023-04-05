@@ -9,6 +9,8 @@ class Joystick{
 private:
     enum Estado {BAIXO = 0, REPOUSO = 127, ALTO = 255};
 
+    uint16_t timerBTN = 500;
+
     int Dac1Adress = 25;
     int Dac2Adress = 26;
 
@@ -63,6 +65,15 @@ public:
     // Rotina para conectar o drone
     void connectDrone(); 
 
+    // Rotinas para acionar os botões 
+    void btnCalibSDAdd();
+    void btnCalibFTAdd();
+    void btnCalibEDAdd();
+
+    void btnCalibSDMinnus();
+    void btnCalibFTMinnus();
+    void btnCalibEDMinnus();
+  
 };
 
 
