@@ -1,7 +1,7 @@
 # Links importantes.
 
 Links: 
-1. [Manual do Drone - Inglês](https://www.manualpdf.com.br/syma/x8-pro/manual)
+1. [Manual do Drone - Inglês]([https://www.manualpdf.com.br/syma/x8-pro/manual](https://drive.google.com/file/d/1oxNExpLiYbzrQTdiBC1Uj3YWIAnN0F_G/view?usp=sharing))
 2. [Manual do Carregador B6AC](https://www.pololu.com/file/0J525/iMAXB6ACmanual.pdf)
 3. [Comutação de chaves](https://pdf1.alldatasheet.com/datasheet-pdf/view/63902/HITACHI/HD74HC4514.html)
 4. [Manual do modelo traduzido](https://docs.google.com/document/d/1pBf5wOTfGP2Xs5MuNQ02NQAMkcyggTxVy2pSgzynDgI/edit)
