@@ -24,6 +24,9 @@ def pushButton_desligar():
 def Disclicked():
     sendSerial("R")
 
+def calibChao():
+    sendSerial("C")
+
 def calibSDAdd():
     sendSerial("1")
 
@@ -116,6 +119,7 @@ screen1 = uic.loadUi("/home/pedro/Documents/Projects/LASC/DRONE/interface/code/t
 screen1.pushButton_parear.clicked.connect(pushButton_parear)
 screen1.pushButton_desligar.clicked.connect(pushButton_desligar)
 screen1.pushButton_iniciar.clicked.connect(pushButton_iniciar)
+screen1.pushButtonCalibChao.clicked.connect(calibChao)
 
 screen1.pushButton_CalibMaxSD.clicked.connect(calibSDAdd)
 screen1.pushButton_CalibMaxFT.clicked.connect(calibFTAdd)

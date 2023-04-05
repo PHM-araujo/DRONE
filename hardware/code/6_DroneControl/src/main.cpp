@@ -17,6 +17,7 @@ void loop() {
 
 		aux = controle.processMSG(msg);
 
+
 		// Se não for um rotina atua nos DACs 
 		if(aux){
 			controle.dacActutor();
