@@ -64,6 +64,8 @@ public:
     void DisconnectDrone();
     // Rotina para conectar o drone
     void connectDrone(); 
+    // Rotina para calibrar o drone com o chão  
+    void calibChao();
 
     // Rotinas para acionar os botões 
     void btnCalibSDAdd();

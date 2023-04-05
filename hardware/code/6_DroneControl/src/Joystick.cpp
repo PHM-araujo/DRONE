@@ -31,7 +31,7 @@ void Joystick::init(){
     while (1);
   }
 
-	Serial.println("Controle iniciando");
+	Serial.println("Controle iniciando...");
 	setJoystickSD(REPOUSO);
   setJoystickHA(REPOUSO);
   setJoystickFT(REPOUSO);
@@ -48,47 +48,39 @@ int Joystick::processMSG(String msg){
 	case 'P':
 		connectDrone();
 		break;
-
   case 'I':
     initDrone();
     break;
-
   case 'D':
     DisconnectDrone();
     break;
-
   case 'S':
     getVoltages(msg);
     return 1;
-
   case 'R':
     rest = true;
     break;
-
+  case 'C':
+    calibChao();
+    break;
   case '1':
     btnCalibSDAdd();
     break;
-
   case '2':
     btnCalibFTAdd();
     break;
-
   case '3':
     btnCalibEDAdd();
     break;
-
   case '4':
     btnCalibSDMinnus();
     break;
-
   case '5':
     btnCalibFTMinnus();
     break;
-
   case '6':
     btnCalibEDMinnus();
     break;
-  
 	default:
 		break;
 	}
@@ -177,7 +169,7 @@ void Joystick::initDrone(){
 	delay(1000);
 	setJoystickSD(REPOUSO);
 	delay(1000);
-	Serial.println("Motores Iniciado");
+	Serial.println("Motores Iniciados");
 }
 
 void Joystick::DisconnectDrone(){
@@ -210,6 +202,25 @@ void Joystick::connectDrone(){
 	delay(1000);
 	Serial.println("Pareado");
 }
+
+void Joystick::calibChao(){
+	
+  Serial.println("Calibrando com o chão...");
+  setJoystickSD(BAIXO);
+  setJoystickHA(BAIXO);
+  setJoystickFT(BAIXO);
+  setJoystickED(BAIXO);
+	delay(3000);
+	setJoystickSD(REPOUSO);
+  setJoystickHA(REPOUSO);
+  setJoystickFT(REPOUSO);
+  setJoystickED(REPOUSO);
+	delay(1000);
+	Serial.println("Calibrado");
+}
+
+
+//----------------------BTNs de ajuste----------------------//
 
 // S8
 void Joystick::btnCalibSDAdd(){
