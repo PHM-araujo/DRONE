@@ -25,6 +25,9 @@ private:
     float FT = REPOUSO;
     float ED = REPOUSO;
 
+    float Rest_LR = 127;
+    float Rest_FT = 127;
+
     //----------------------AUX----------------------//
     // Configura o Joystick relacionado ao DAC do Esp32 - 1
     void setJoystickSD(int nivel);

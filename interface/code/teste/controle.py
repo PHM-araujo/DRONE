@@ -48,45 +48,70 @@ def calibEDMinnus():
 
 # ---------------- Btns direções ---------------- #
 def pushButton_sobe(): 
+    rest_valueLR = str(screen1.horizontalSlider_tunningLR.sliderPosition())
+    rest_valueFT = str(screen1.verticalSlider_tunningFB.sliderPosition())
     passo = str(screen1.horizontalSlider_passo.sliderPosition() + 127)
-    msg = "S,SD" + passo + ",HA127,FT127,ED127,"
+    msg = "S,SD" + passo + ",HA127,FT" + rest_valueFT + ",ED" + rest_valueLR +  ","
     sendSerial(msg)
 
 def pushButton_desce(): 
+    rest_valueLR = str(screen1.horizontalSlider_tunningLR.sliderPosition())
+    rest_valueFT = str(screen1.verticalSlider_tunningFB.sliderPosition())
     passo = str(127 - screen1.horizontalSlider_passo.sliderPosition())
-    msg = "S,SD" + passo + ",HA127,FT127,ED127,"
+    msg = "S,SD" + passo + ",HA127,FT" + rest_valueFT + ",ED" + rest_valueLR +  ","
     sendSerial(msg)
 
 def pushButton_horario(): 
+    rest_valueLR = str(screen1.horizontalSlider_tunningLR.sliderPosition())
+    rest_valueFT = str(screen1.verticalSlider_tunningFB.sliderPosition())
     passo = str(screen1.horizontalSlider_passo.sliderPosition() + 127)
-    msg = "S,SD127,HA" + passo + ",FT127,ED127,"
+    msg = "S,SD127,HA" + passo + ",FT" + rest_valueFT + ",ED" + rest_valueLR +  ","
     sendSerial(msg)
 
 def pushButton_antihorario(): 
+    rest_valueLR = str(screen1.horizontalSlider_tunningLR.sliderPosition())
+    rest_valueFT = str(screen1.verticalSlider_tunningFB.sliderPosition())
     passo = str(127 - screen1.horizontalSlider_passo.sliderPosition())
-    msg = "S,SD127,HA" + passo + ",FT127,ED127,"
+    msg = "S,SD127,HA" + passo + ",FT" + rest_valueFT + ",ED" + rest_valueLR +  ","
     sendSerial(msg)
 
 def pushButton_frente(): 
-    passo = str(screen1.horizontalSlider_passo.sliderPosition() + 127)
-    msg = "S,SD127,HA127,FT" + passo + ",ED127,"
+    rest_valueLR = str(screen1.horizontalSlider_tunningLR.sliderPosition())
+    rest_valueFT = int(screen1.verticalSlider_tunningFB.sliderPosition())
+
+    passo = str(screen1.horizontalSlider_passo.sliderPosition() + rest_valueFT)
+    msg = "S,SD127,HA127,FT" + passo + ",ED" + rest_valueLR +  ","
     sendSerial(msg)
 
 def pushButton_tras(): 
-    passo = str(127 - screen1.horizontalSlider_passo.sliderPosition())
-    msg = "S,SD127,HA127,FT" + passo + ",ED127,"
+    rest_valueLR = str(screen1.horizontalSlider_tunningLR.sliderPosition())
+    rest_valueFT = int(screen1.verticalSlider_tunningFB.sliderPosition())
+    passo = str(rest_valueFT - screen1.horizontalSlider_passo.sliderPosition())
+    msg = "S,SD127,HA127,FT" + passo + ",ED" + rest_valueLR +  ","
     sendSerial(msg)
 
 def pushButton_direita(): 
-    passo = str(127 - screen1.horizontalSlider_passo.sliderPosition())
-    msg = "S,SD127,HA127,FT127,ED" + passo + ","
+    rest_valueLR = int(screen1.horizontalSlider_tunningLR.sliderPosition())
+    rest_valueFT = str(screen1.verticalSlider_tunningFB.sliderPosition())
+
+    passo = str(rest_valueLR - screen1.horizontalSlider_passo.sliderPosition())
+    msg = "S,SD127,HA127,FT" + rest_valueFT + ",ED" + passo + ","
     sendSerial(msg)
 
 def pushButton_esquerda(): 
-    passo = str(127 + screen1.horizontalSlider_passo.sliderPosition())
-    msg = "S,SD127,HA127,FT127,ED" + passo + ","
+    rest_valueLR = int(screen1.horizontalSlider_tunningLR.sliderPosition())
+    rest_valueFT = str(screen1.verticalSlider_tunningFB.sliderPosition())
+
+    passo = str(rest_valueLR + screen1.horizontalSlider_passo.sliderPosition())
+    msg = "S,SD127,HA127,FT" + rest_valueFT + ",ED" + passo + ","
     sendSerial(msg)
 
+def pushButton_setRest():
+    rest_valueLR = str(screen1.horizontalSlider_tunningLR.sliderPosition())
+    rest_valueFT = str(screen1.verticalSlider_tunningFB.sliderPosition())
+    msg = "SR,FT" + rest_valueLR + ",ED" + rest_valueFT + ","
+    sendSerial(msg)
+        
 # ---------------- Btns others ----------------# 
 def pushButton_passoAdd(): 
     aux = screen1.horizontalSlider_passo.sliderPosition() + 1;
@@ -95,7 +120,6 @@ def pushButton_passoAdd():
         screen1.horizontalSlider_passo.setValue(aux);
         screen1.lcdNumber_passo.display(aux) 
 
-
 def pushButton_passoMinus(): 
     aux = screen1.horizontalSlider_passo.sliderPosition() - 1;
     
@@ -103,11 +127,15 @@ def pushButton_passoMinus():
         screen1.horizontalSlider_passo.setValue(aux);
         screen1.lcdNumber_passo.display(aux)  
     
-
-
 # Sld Fuctions
-def  slider_passo():
+def slider_passo():
     screen1.lcdNumber_passo.display(screen1.horizontalSlider_passo.sliderPosition())
+
+def slider_tunningLR():
+    screen1.lcdNumber_tunningLR.display(screen1.horizontalSlider_tunningLR.sliderPosition())
+
+def slider_tunningFT():
+    screen1.lcdNumber_tunningFB.display(screen1.verticalSlider_tunningFB.sliderPosition())
 
 
 # App Exec 
@@ -131,6 +159,8 @@ screen1.pushButton_CalibMinFT.clicked.connect(calibFTMinnus)
 screen1.pushButton_CalibMinED.clicked.connect(calibEDMinnus)
 
 # ----------------Direções---------------- #
+screen1.pushButton_SetRest.pressed.connect(pushButton_setRest)
+
 screen1.pushButton_sobe.pressed.connect(pushButton_sobe)
 screen1.pushButton_sobe.clicked.connect(Disclicked)
 
@@ -164,6 +194,8 @@ screen1.pushButton_passoMinus.clicked.connect(pushButton_passoMinus)
 
 # Sliders
 screen1.horizontalSlider_passo.valueChanged.connect(slider_passo)
+screen1.horizontalSlider_tunningLR.valueChanged.connect(slider_tunningLR)
+screen1.verticalSlider_tunningFB.valueChanged.connect(slider_tunningFT)
 
 
 # Leds
