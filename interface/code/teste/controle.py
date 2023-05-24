@@ -10,7 +10,6 @@ def sendSerial(value):
     ser.close()
 
 # Btn Fuctions
-
 # ---------------- Btns rotinas ----------------#
 def pushButton_parear(): 
     sendSerial("P")
@@ -109,7 +108,7 @@ def pushButton_esquerda():
 def pushButton_setRest():
     rest_valueLR = str(screen1.horizontalSlider_tunningLR.sliderPosition())
     rest_valueFT = str(screen1.verticalSlider_tunningFB.sliderPosition())
-    msg = "SR,FT" + rest_valueLR + ",ED" + rest_valueFT + ","
+    msg = "A,FT" + rest_valueLR + ",ED" + rest_valueFT + ","
     sendSerial(msg)
         
 # ---------------- Btns others ----------------# 
@@ -204,3 +203,7 @@ screen1.lcdNumber_passo.display(screen1.horizontalSlider_passo.sliderPosition())
 
 screen1.show()
 app.exec()
+
+
+
+"S,SD127,HA127,FT127,ED127,"

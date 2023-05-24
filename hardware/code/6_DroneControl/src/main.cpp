@@ -21,7 +21,6 @@ void loop() {
 		// Se não for um rotina atua nos DACs 
 		if(aux){
 			controle.dacActutor();
-			delay(100);
 		}
 		
 		if (controle.rest){

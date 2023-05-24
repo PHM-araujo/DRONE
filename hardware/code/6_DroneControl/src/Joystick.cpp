@@ -60,6 +60,9 @@ int Joystick::processMSG(String msg){
   case 'R':
     rest = true;
     break;
+  case 'A':
+    getRest(msg);
+    break;
   case 'C':
     calibChao();
     break;
@@ -116,22 +119,6 @@ void Joystick::setJoystickED(int nivel){
 
 void Joystick::getVoltages(String msg){
 	String SD_str = "", HA_str = "", FT_str = "", ED_str = "";
-  String RFT_str = "", RLR_str = "";
-
-
-  if(msg[1] == 'R'){
-    int pos = msg.indexOf(',', 3);
-    for(int i = 5; i < pos; i++) RFT_str += msg[i];
-
-    int pos2 = msg.indexOf(',', pos + 1);
-    for(int i = pos + 3; i < pos2; i++) RLR_str += msg[i];
-
-    Rest_LR = RLR_str.toInt();
-    Rest_FT = RFT_str.toInt();
-
-    return;
-
-  }
 
   int pos = msg.indexOf(',', 2);
   for(int i = 4; i < pos; i++) SD_str += msg[i];
@@ -400,3 +387,19 @@ void Joystick::btnCalibEDMinnus(){
 
 }
 
+
+void Joystick::getRest(String msg){
+  String RFT_str = "", RLR_str = "";
+  int pos = msg.indexOf(',', 3);
+  for(int i = 5; i < pos; i++) RFT_str += msg[i];
+
+  int pos2 = msg.indexOf(',', pos + 1);
+  for(int i = pos + 3; i < pos2; i++) RLR_str += msg[i];
+
+  Rest_LR = RLR_str.toInt();
+  Rest_FT = RFT_str.toInt();
+
+  returnRest();
+
+  return;
+}

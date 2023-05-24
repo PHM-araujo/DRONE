@@ -78,6 +78,8 @@ public:
     void btnCalibSDMinnus();
     void btnCalibFTMinnus();
     void btnCalibEDMinnus();
+
+    void getRest(String msg);
   
 };
 
