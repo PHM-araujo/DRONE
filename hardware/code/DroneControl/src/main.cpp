@@ -15,18 +15,18 @@ void loop() {
 		String msg = Serial.readStringUntil(';');
 		Serial.println(msg);
 
-		aux = controle.processMSG(msg);
+		// aux = controle.processMSG(msg);
 
 
-		// Se não for um rotina atua nos DACs 
-		if(aux){
-			controle.dacActutor();
-		}
+		// // Se não for um rotina atua nos DACs 
+		// if(aux){
+		// 	controle.dacActutor();
+		// }
 		
-		if (controle.rest){
-			controle.returnRest();
-			controle.rest = false;
-		}
+		// if (controle.rest){
+		// 	controle.returnRest();
+		// 	controle.rest = false;
+		// }
 		
 	}
 }
