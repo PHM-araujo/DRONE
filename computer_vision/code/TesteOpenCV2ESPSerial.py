@@ -3,8 +3,7 @@ import cv2
 import time
 
 def sendSerial(value):
-	ser=serial.Serial('/dev/ttyUSB0',baudrate=115200, timeout=1, write_timeout=1)
-	ser.flush()
+	ser=serial.Serial('/dev/ttyUSB0',baudrate=115200)
 	ser.write(value.encode())
 	ser.close()
 
@@ -40,8 +39,7 @@ height=height/2
 
 
 while True:
-	time.sleep(1)
-	sendSerial("T")
+	#sendSerial("T")
 	if webCamera.isOpened(): 
 		camera, frame = webCamera.read()
 		cinza = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)

@@ -8,6 +8,8 @@ Joystick controle = Joystick();
 void setup(){
   Serial.begin(115200);
   controle.init();
+  // Configura o timeout da Serial (Milliseconds)
+  Serial.setTimeout(1); 
 }
 
 void loop() {
